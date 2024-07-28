@@ -8,14 +8,11 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+CHANNEL_ID = int(os.getenv('CHANNEL_ID'))
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 client = discord.Client(intents = intents)
-channel = client.get_channel(1175881589989838951)
-
-
-
 
 
 
@@ -44,7 +41,7 @@ async def on_member_join(member):
     )
     await member.send("Hello, Darling!")
   
-    channel = client.get_channel(1175881589989838951)
+    channel = client.get_channel(CHANNEL_ID)
     await channel.send(      
           f'Hi {member.name}, welcome to the Silent Book Club - Munich chapter'
     )
@@ -52,7 +49,7 @@ async def on_member_join(member):
 @client.event
 async def on_member_remove(member):
 
-    channel = client.get_channel(1175881589989838951)
+    channel = client.get_channel(CHANNEL_ID)
 
     await channel.send(
 
@@ -83,8 +80,8 @@ async def on_message(message):
         response = random.choice(brooklyn_99_quotes)
         await message.channel.send(response)
 
-    if message.content == "Hello Donnie":
-        response = "Hello, it is me, Donnie"
+    if message.content == "Hello ":
+        response = "Hello, it is me"
         await message.channel.send(response)
 
 
